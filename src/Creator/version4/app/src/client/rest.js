@@ -1,8 +1,6 @@
 import common from './common'
 
 const BASE_URL = `${common.baseUrl}${common.path}/rest`
-console.log('BASE_URL')
-console.log(BASE_URL)
 
 const DEFAULT_HEADERS = {
   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -13,9 +11,8 @@ export const rest = endpoint => fetch(
   {
     method: 'GET',
     headers: DEFAULT_HEADERS,
-    credentials: 'include',
+    credentials: 'include'
   })
   .then(r => r.json())
-  .then(r => {console.log(r); return r;})
+  .then(r => { console.debug(r); return r })
   .catch(console.error)
-
