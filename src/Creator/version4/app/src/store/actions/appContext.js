@@ -34,7 +34,6 @@ const startNewCharacter = (initialCredits) =>
     dispatch(loadingStart())
     return dispatch(creditsActions.setCP(initialCredits))
       .then(() => dispatch(checkExistingSession()))
-      .then(() => dispatch(loadingStart()))
       .then(({value}) => {
         if (value.sessionExist) {
           return dispatch(refDataActions.loadAllRefData())
