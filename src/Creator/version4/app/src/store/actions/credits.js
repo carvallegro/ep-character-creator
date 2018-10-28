@@ -6,7 +6,7 @@ export const creditTypes = {
 
 const setCP = (cpAmount = 1000) => ({
   type: creditTypes.SET_CP,
-  payload: dispatcher.dispatch(`setCP=${cpAmount}&getCrePoint=get`)
+  payload: dispatcher.dispatcher(`setCP=${cpAmount}&getCrePoint=get`)
 })
 
 export default {

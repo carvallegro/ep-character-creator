@@ -1,33 +1,40 @@
-// import 'carbon-components/scss/globals/scss/styles.scss'
+import React, { Fragment } from 'react'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-import React from 'react'
 import Layout from './components/layout'
+import Loading from './components/loading'
+import DatabasePage from './pages/database'
+import NewCharacterPage from './pages/new-character'
 
 import './App.scss'
 
-import Backgrounds from './components/backgrounds'
-import { H } from './components/typography'
-import GearList from './components/gear'
-import AiList from './components/ai'
-import MorphList from './components/morphs'
-import SoftwareList from './components/software'
-
-const App = () => {
+const App = ({sessionCheckLoading, sessionExist}) => {
   return (
-    <Layout>
-      {/* <Loading/> */}
-      <H h={1}>Backgrounds</H>
-      <Backgrounds />
-      <H h={1}>Gear</H>
-      <GearList/>
-      <H h={1}>AI</H>
-      <AiList/>
-      <H h={1}>Software</H>
-      <SoftwareList/>
-      <H h={1}>Morphs</H>
-      <MorphList/>
-    </Layout>
+    <Router>
+      <Fragment>
+        {
+          sessionCheckLoading &&
+          <Loading/>
+        }
+        {
+          !sessionExist &&
+          <NewCharacterPage/>
+        }
+        {
+          sessionExist &&
+          <Layout>
+            <Route path="/" exact component={DatabasePage}/>
+          </Layout>
+        }
+      </Fragment>
+    </Router>
   )
 }
 
-export default App
+const mapStateToProps = ({appContext}) => ({
+  sessionCheckLoading: appContext.session.loading,
+  sessionExist: (!appContext.session.loading) && appContext.session.exist
+})
+
+export default connect(mapStateToProps)(App)

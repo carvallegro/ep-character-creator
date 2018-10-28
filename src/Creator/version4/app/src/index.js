@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
 `
 
 store.dispatch(contextActions.checkExistingSession())
-store.dispatch(dataActions.loadAllRefData())
+// store.dispatch(dataActions.loadAllRefData())
 
 ReactDOM.render(
   <Provider store={store}>
