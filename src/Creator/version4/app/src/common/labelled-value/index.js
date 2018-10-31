@@ -1,46 +1,59 @@
+import kebabCase from 'lodash/fp/lowerCase'
+
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Icon } from 'carbon-components-react'
+import { compose } from 'recompose'
+import { Icon, InlineLoading } from 'carbon-components-react'
 import { iconEdit } from 'carbon-icons'
 
-import { withHoverEffect } from '../../hoc/cursorEffects'
+import { withEditEffect, withHoverEffect } from '../../hoc/cursorEffects'
 
-import { EditButtonWrapper, StyledFormLabel, Wrapper } from './styles'
+import { EditButtonWrapper, StyledFormLabel, TextValue, Wrapper } from './styles'
+import { TextInput } from './inputs'
 
-import './styles.scss'
+const enhance = compose(withEditEffect, withHoverEffect)
 
 const propTypes = valuePropType => ({
-  title: PropTypes.string.isRequired,
-  value: valuePropType,
-  defaultValue: valuePropType,
-  readOnly: PropTypes.bool,
-  gridArea: PropTypes.string
+    title: PropTypes.string.isRequired,
+    value: valuePropType,
+    defaultValue: valuePropType,
+    readOnly: PropTypes.bool,
+    gridArea: PropTypes.string
 })
 
 const EditButton = ({ onClick, visible }) =>
-  !true ? null : (
-    <EditButtonWrapper
-      className="icon-edit"
-      onClick={onClick}
-      visible={visible}>
-      <Icon icon={iconEdit} />
-    </EditButtonWrapper>
-  )
+    !visible ? null : (
+        <EditButtonWrapper
+            onClick={onClick}
+            visible={visible}>
+            <Icon icon={iconEdit}/>
+        </EditButtonWrapper>
+    )
 
-export const LabelledText = withHoverEffect(
-  ({ title, value, defaultValue, gridArea, onHover, hovered }) => (
-    <Wrapper
-      gridArea={gridArea}
-      onMouseOver={() => onHover(true)}
-      onMouseLeave={() => onHover(false)}
-      onClick={e => e.preventDefault()}>
-      <StyledFormLabel>
-        {title}{' '}
-        <EditButton onClick={() => console.log('hi')} visible={hovered} />
-      </StyledFormLabel>
-      <p>{value ? value : defaultValue}</p>
-    </Wrapper>
-  )
+const LabelledTextJSX = withHoverEffect(
+    ({ title, value, defaultValue, gridArea, onHover, hovered, isBeingEdited, edit }) => (
+        <Wrapper
+            gridArea={gridArea}
+            onMouseOver={() => onHover(true)}
+            onMouseLeave={() => onHover(false)}
+            onClick={e => e.preventDefault()}>
+            <StyledFormLabel>
+                {title}{' '}
+                <EditButton onClick={() => edit(true)} visible={hovered}/>
+            </StyledFormLabel>
+            {
+                !isBeingEdited ||
+                <TextInput id={kebabCase(title)} hideLabel={true} value={value} labelText='' light
+                           onValidate={() => edit(false)} onCancel={() => edit(false)}/>
+            }
+            {
+                isBeingEdited || <TextValue>{value ? value : defaultValue} <InlineLoading success={false}/></TextValue>
+            }
+            // TODO: Add Inline Loader
+        </Wrapper>
+    )
 )
+LabelledTextJSX.propTypes = propTypes(PropTypes.string)
 
-LabelledText.propTypes = propTypes(PropTypes.string)
+export const LabelledText = enhance(LabelledTextJSX)
+

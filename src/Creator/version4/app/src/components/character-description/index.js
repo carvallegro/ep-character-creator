@@ -8,7 +8,8 @@ import { Card } from '../../common/cards'
 const Wrapper = styled.div`
   display: grid;
   grid-gap: 12px;
-  grid-template-areas:
+  grid-auto-columns: 50%;
+  grid-template:
     'player   character'
     'age      gender'
     'notes    notes';
