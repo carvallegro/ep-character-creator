@@ -27,14 +27,14 @@ export const appContext = typeToReducer({
         exist: payload.sessionExist
       }
     }),
-    PENDING: (state, { payload }) => ({
+    PENDING: (state ) => ({
       ...state,
       session: {
         loading: true,
         exist: false
       }
     }),
-    REJECTED: (state, action) => ({
+    REJECTED: (state) => ({
       ...state,
       error: true,
       session: {

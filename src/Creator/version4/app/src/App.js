@@ -6,6 +6,7 @@ import Layout from './components/layout'
 import Loading from './components/loading'
 import DatabasePage from './pages/database'
 import NewCharacterPage from './pages/new-character'
+import CharacterPage from './pages/character-sheet'
 
 import './App.scss'
 
@@ -24,7 +25,8 @@ const App = ({sessionCheckLoading, sessionExist}) => {
         {
           sessionExist &&
           <Layout>
-            <Route path="/" exact component={DatabasePage}/>
+            <Route path="/" exact component={CharacterPage}/>
+            <Route path="/database" exact component={DatabasePage}/>
           </Layout>
         }
       </Fragment>
