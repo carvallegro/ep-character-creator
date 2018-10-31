@@ -14,13 +14,13 @@ const checkExistingSession = () => ({
   payload: dispatcher.dispatcher('firstTime=first&getCrePoint=get')
 })
 
-const loadingStart = () => ({type: appContextTypes.LOADING_START})
-const loadingStop = () => ({type: appContextTypes.LOADING_STOP})
+const loadingStart = () => ({ type: appContextTypes.LOADING_START })
+const loadingStop = () => ({ type: appContextTypes.LOADING_STOP })
 
 const appLoad = () => dispatch => {
   dispatch(loadingStart())
   dispatch(checkExistingSession())
-    .then(({value}) => {
+    .then(({ value }) => {
       if (value.sessionExist) {
         return dispatch(refDataActions.loadAllRefData())
       }
@@ -28,11 +28,11 @@ const appLoad = () => dispatch => {
     .then(() => dispatch(loadingStop()))
 }
 
-const startNewCharacter = (initialCredits) => dispatch => {
+const startNewCharacter = initialCredits => dispatch => {
   dispatch(loadingStart())
   return dispatch(creditsActions.setCP(initialCredits))
     .then(() => dispatch(checkExistingSession()))
-    .then(({value}) => {
+    .then(({ value }) => {
       if (value.sessionExist) {
         return dispatch(refDataActions.loadAllRefData())
       }

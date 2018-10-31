@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 import { GroupedList, NameAndBookLine } from '../../common/list'
 import { withColumn } from '../../hoc/grid'
 
-const GearList = ({gear}) => (
+const GearList = ({ gear }) => (
   <Fragment>
     <GroupedList
       title="Select a gear"
@@ -21,50 +21,53 @@ const GearList = ({gear}) => (
 )
 
 const gearType = type => {
-  switch(type) {
+  switch (type) {
     case 'SOF':
-      return "Kinetic Weapons"
+      return 'Kinetic Weapons'
     case 'STD':
-      return "Energy Weapons"
+      return 'Energy Weapons'
     case 'WMG':
-      return "Spray Weapons"
+      return 'Spray Weapons'
     case 'WEG':
-      return "Seeker Weapons"
+      return 'Seeker Weapons'
     case 'WKG':
-      return "Melee Weapons"
+      return 'Melee Weapons'
     case 'WSG':
-      return "Ammunition"
+      return 'Ammunition'
     case 'WXG':
-      return "Grenades and Missiles"
+      return 'Grenades and Missiles'
     case 'WSE':
-      return "Weapon Accessories"
+      return 'Weapon Accessories'
     case 'WAM':
-      return "Armor"
+      return 'Armor'
     case 'WAC':
-      return "Drugs"
+      return 'Drugs'
     case 'ARM':
-      return "Poisons"
+      return 'Poisons'
     case 'IMG':
-      return "Chemicals"
+      return 'Chemicals'
     case 'DRG':
-      return "Pets"
+      return 'Pets'
     case 'CHG':
-      return "Vehicles"
+      return 'Vehicles'
     case 'POG':
-      return "Robots"
+      return 'Robots'
     case 'PEG':
-      return "Misc."
+      return 'Misc.'
   }
 }
 
 const getGearType = gear => gearType(gear.gearType)
-const mapStateToProps = ({refData}) => ({
+const mapStateToProps = ({ refData }) => ({
   // gear: {
   //   "Software": refData.softGear.data,
   //   "Gear": refData.hardGear.data
   // },
-  gear: pipe(values, groupBy(getGearType), mapKeys(capitalize))(refData.hardGear.data)
-
+  gear: pipe(
+    values,
+    groupBy(getGearType),
+    mapKeys(capitalize)
+  )(refData.hardGear.data)
 })
 
 export default connect(mapStateToProps)(withColumn({ xs: 2 })(GearList))

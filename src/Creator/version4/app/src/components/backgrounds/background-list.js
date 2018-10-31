@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import { List, NameAndBookLine } from '../../common/list'
 
-const BackgroundList = ({backgrounds}) => (
+const BackgroundList = ({ backgrounds }) => (
   <Fragment>
     <List
       title="Choose a background"
@@ -15,7 +15,7 @@ const BackgroundList = ({backgrounds}) => (
   </Fragment>
 )
 
-const mapStateToProps = ({refData}) => ({
+const mapStateToProps = ({ refData }) => ({
   backgrounds: values(refData.backgrounds.data)
 })
 

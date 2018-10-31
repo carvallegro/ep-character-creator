@@ -24,13 +24,16 @@ const loadCredits = (state, { payload }) => ({
   ksr: payload['ksr_remain']
 })
 
-export const credits = typeToReducer({
-  [creditTypes.SET_CP]: {
-    FULFILLED: loadCredits
+export const credits = typeToReducer(
+  {
+    [creditTypes.SET_CP]: {
+      FULFILLED: loadCredits
+    },
+    [appContextTypes.SESSION_CHECK]: {
+      FULFILLED: loadCredits
+    }
   },
-  [appContextTypes.SESSION_CHECK]: {
-    FULFILLED: loadCredits
-  }
-}, INITIAL_STATE)
+  INITIAL_STATE
+)
 
 export default credits

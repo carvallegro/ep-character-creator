@@ -8,9 +8,8 @@ import { withColumn } from '../../hoc/grid'
 import { Card } from '../../common/cards'
 import SoftwareList from './software-list'
 
-const SoftwareCard = ({ai: software = {}}) => (
+const SoftwareCard = ({ ai: software = {} }) => (
   <Card title={software.name}>
-
     <FormLabel>Cost</FormLabel>
     <p>{software.cost} Credits</p>
 
@@ -20,21 +19,25 @@ const SoftwareCard = ({ai: software = {}}) => (
     {/*<FormLabel>Skills</FormLabel>*/}
     {/*<p>{map(a => a.name)(software.skills).join(', ')}</p>*/}
 
-
     <FormLabel>Description</FormLabel>
-    <p dangerouslySetInnerHTML={{__html: software.description}}/>
-
+    <p dangerouslySetInnerHTML={{ __html: software.description }} />
   </Card>
 )
 
-
-const mapStateToProps = ({refData}) => ({
+const mapStateToProps = ({ refData }) => ({
   ai: refData.softGear.data[refData.softGear.selected]
 })
 
 const EnhancedSoftwareList = withColumn({ xs: 2 })(SoftwareList)
-const EnhancedSoftwareCard = withColumn({ xs: 4 })(connect(mapStateToProps)(SoftwareCard))
+const EnhancedSoftwareCard = withColumn({ xs: 4 })(
+  connect(mapStateToProps)(SoftwareCard)
+)
 
-const SoftwareLayout = () => <Fragment><EnhancedSoftwareList /><EnhancedSoftwareCard /></Fragment>
+const SoftwareLayout = () => (
+  <Fragment>
+    <EnhancedSoftwareList />
+    <EnhancedSoftwareCard />
+  </Fragment>
+)
 
 export default SoftwareLayout

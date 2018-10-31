@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import { List, NameAndBookLine } from '../../common/list'
 
-export const SoftwareList = ({software}) => (
+export const SoftwareList = ({ software }) => (
   <Fragment>
     <List
       title="Choose a software"
@@ -15,7 +15,7 @@ export const SoftwareList = ({software}) => (
   </Fragment>
 )
 
-export const mapStateToProps = ({refData}) => ({
+export const mapStateToProps = ({ refData }) => ({
   software: values(refData.softGear.data)
 })
 
