@@ -40,8 +40,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "lint": "standard",
-    "lint:fix": "standard --fix"
+    "lint": "prettier --single-quote --no-semi \"{app,__{tests,mocks}__}/**/*.js\"",
+    "lint:fix": "prettier --single-quote --no-semi --write \"{src,__{tests,mocks}__}/**/*.js\""
   },
   "eslintConfig": {
     "extends": [

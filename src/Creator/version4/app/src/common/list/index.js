@@ -3,8 +3,7 @@ import map from 'lodash/fp/map'
 import size from 'lodash/fp/size'
 import kebabCase from 'lodash/fp/lowerCase'
 
-
-import React  from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
@@ -25,7 +24,7 @@ const Wrapper = styled(Tile)`
   position: relative;
   height: 500px;
   padding: 0;
-  
+
   flex-direction: column;
 `
 
@@ -41,56 +40,54 @@ const ListWrapper = styled.div`
   overflow: scroll;
 `
 
-const listWrapper = Component => props => (<Wrapper>
-  <ListHeader>{props.title}</ListHeader>
-  <ListWrapper>
-    <Component {...props}/>
-  </ListWrapper>
-</Wrapper>)
+const listWrapper = Component => props => (
+  <Wrapper>
+    <ListHeader>{props.title}</ListHeader>
+    <ListWrapper>
+      <Component {...props} />
+    </ListWrapper>
+  </Wrapper>
+)
 
-
-export const List = listWrapper(({title, renderLine, values}) => (
+export const List = listWrapper(({ title, renderLine, values }) => (
   <TileGroup key={`${kebabCase(title)}-list-body`} name={`${title}-list`}>
-    {
-      size(values) > 0 &&
-      map(renderLine)(values)
-    }
+    {size(values) > 0 && map(renderLine)(values)}
   </TileGroup>
 ))
 List.propTypes = {
   renderLine: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
-  values: PropTypes.array,
+  values: PropTypes.array
 }
 List.defaultProps = {
   values: {}
 }
 
-export const GroupedList = listWrapper(({title, renderLine, values}) => (
+export const GroupedList = listWrapper(({ title, renderLine, values }) => (
   <Accordion>
-    {
-      map(key =>
-        <AccordionItem open={true} key={`${key}-accordion`} title={key} className='grouped-list'
-        >
-          <TileGroup key={`${key}-list-body`} name={`${key}-list`}>
-            {
-              size(values[key]) > 0 &&
-              map(renderLine)(values[key])
-            }
-          </TileGroup>
-        </AccordionItem>)(keys(values))
-    }
+    {map(key => (
+      <AccordionItem
+        open={true}
+        key={`${key}-accordion`}
+        title={key}
+        className="grouped-list"
+      >
+        <TileGroup key={`${key}-list-body`} name={`${key}-list`}>
+          {size(values[key]) > 0 && map(renderLine)(values[key])}
+        </TileGroup>
+      </AccordionItem>
+    ))(keys(values))}
   </Accordion>
 ))
 GroupedList.propTypes = {
   ...List.propTypes,
-  values: PropTypes.object,
+  values: PropTypes.object
 }
 GroupedList.defaultProps = {
   values: {}
 }
 
-export const NameAndBookLine = (value) => (
+export const NameAndBookLine = value => (
   <RadioTile
     id={value.atomUid}
     key={value.atomUid}
@@ -98,6 +95,6 @@ export const NameAndBookLine = (value) => (
     value={value.atomUid}
   >
     {value.name}
-    <ButtonTag book={value.book}/>
-  </RadioTile>)
-
+    <ButtonTag book={value.book} />
+  </RadioTile>
+)

@@ -8,7 +8,7 @@ const LoadingWrapper = styled.div`
 `
 
 const LoadingContent = styled.header`
-  background-color: ${({theme}) => theme.colors.coolGray['90']}};
+  background-color: ${({ theme }) => theme.colors.coolGray['90']}};
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,14 +28,16 @@ const LoadingLogo = styled.img`
     to {
       transform: rotate(360deg);
     }
-  }  
+  }
 `
 
-export const Loading = () => (<LoadingWrapper>
-  <LoadingContent>
-    <LoadingLogo src={logo} alt='logo' />
-    <h1 className='App-title'>Welcome to React, with Carbon!</h1>
-  </LoadingContent>
-</LoadingWrapper>)
+export const Loading = () => (
+  <LoadingWrapper>
+    <LoadingContent>
+      <LoadingLogo src={logo} alt="logo" />
+      <h1 className="App-title">Welcome to React, with Carbon!</h1>
+    </LoadingContent>
+  </LoadingWrapper>
+)
 
 export default Loading

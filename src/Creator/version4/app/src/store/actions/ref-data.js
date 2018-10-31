@@ -50,14 +50,23 @@ let actions = {
 }
 
 const mapDispatch = dispatch => flatMap(action => dispatch(action()))
-const triggerAllActions = dispatch => () => pipe(values, mapDispatch(dispatch))(actions)
+const triggerAllActions = dispatch => () =>
+  pipe(
+    values,
+    mapDispatch(dispatch)
+  )(actions)
 
 const dispatchActions = (actions = []) => ({
   type: dataTypes.LOAD_ALL_REF_DATA,
   payload: Promise.all([...actions])
 })
 
-const loadAllRefData = () => dispatch => (pipe(triggerAllActions(dispatch), dispatchActions, dispatch)())
+const loadAllRefData = () => dispatch =>
+  pipe(
+    triggerAllActions(dispatch),
+    dispatchActions,
+    dispatch
+  )()
 
 export default {
   ...actions,

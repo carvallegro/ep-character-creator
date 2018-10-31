@@ -23,9 +23,7 @@ export const Layout = ({ children }) => (
     <Header />
     <SideNav />
     <LayoutContainer>
-      <LayoutContent>
-        {children}
-      </LayoutContent>
+      <LayoutContent>{children}</LayoutContent>
     </LayoutContainer>
   </React.Fragment>
 )

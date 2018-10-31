@@ -11,38 +11,41 @@ const INITIAL_STATE = {
   }
 }
 
-export const appContext = typeToReducer({
-  [appContextTypes.LOADING_START]: (state ) => ({
-    ...state,
-    session: {
-      loading: true,
-      exist: state.session.exist
-    }
-  }),
-  [appContextTypes.SESSION_CHECK]: {
-    FULFILLED: (state, { payload }) => ({
-      ...state,
-      session: {
-        loading: false,
-        exist: payload.sessionExist
-      }
-    }),
-    PENDING: (state ) => ({
+export const appContext = typeToReducer(
+  {
+    [appContextTypes.LOADING_START]: state => ({
       ...state,
       session: {
         loading: true,
-        exist: false
+        exist: state.session.exist
       }
     }),
-    REJECTED: (state) => ({
-      ...state,
-      error: true,
-      session: {
-        loading: false,
-        exist: false
-      }
-    })
-  }
-}, INITIAL_STATE)
+    [appContextTypes.SESSION_CHECK]: {
+      FULFILLED: (state, { payload }) => ({
+        ...state,
+        session: {
+          loading: false,
+          exist: payload.sessionExist
+        }
+      }),
+      PENDING: state => ({
+        ...state,
+        session: {
+          loading: true,
+          exist: false
+        }
+      }),
+      REJECTED: state => ({
+        ...state,
+        error: true,
+        session: {
+          loading: false,
+          exist: false
+        }
+      })
+    }
+  },
+  INITIAL_STATE
+)
 
 export default appContext

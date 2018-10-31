@@ -9,9 +9,8 @@ import { withColumn } from '../../hoc/grid'
 import AiList from './ai-list'
 import { FormLabel } from 'carbon-components-react'
 
-const AiCard = ({ai = {}}) => (
+const AiCard = ({ ai = {} }) => (
   <Card title={ai.name}>
-
     <FormLabel>Cost</FormLabel>
     <p>{ai.cost} Credits</p>
 
@@ -21,19 +20,22 @@ const AiCard = ({ai = {}}) => (
     <FormLabel>Skills</FormLabel>
     <p>{map(a => a.name)(ai.skills).join(', ')}</p>
 
-
     <FormLabel>Description</FormLabel>
-    <p dangerouslySetInnerHTML={{__html: ai.description}}/>
-
+    <p dangerouslySetInnerHTML={{ __html: ai.description }} />
   </Card>
 )
 
-const mapStateToProps = ({refData}) => ({
+const mapStateToProps = ({ refData }) => ({
   ai: refData.ai.data[refData.ai.selected]
 })
 
-const EnhancedAiList = withColumn({xs: 2})(AiList)
-const EnhancedAiCard = withColumn({xs: 4})(connect(mapStateToProps)(AiCard))
+const EnhancedAiList = withColumn({ xs: 2 })(AiList)
+const EnhancedAiCard = withColumn({ xs: 4 })(connect(mapStateToProps)(AiCard))
 
-const AiLayout = () => <Fragment><EnhancedAiList /><EnhancedAiCard /></Fragment>
+const AiLayout = () => (
+  <Fragment>
+    <EnhancedAiList />
+    <EnhancedAiCard />
+  </Fragment>
+)
 export default AiLayout
