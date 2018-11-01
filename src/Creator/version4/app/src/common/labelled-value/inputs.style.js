@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { EditButtonWrapper } from './styles'
 import { TextInput } from 'carbon-components-react'
+import { EditButtonWrapper } from './styles'
 
 
 export const InputWrapper = styled.div`
@@ -31,5 +31,4 @@ export const InputActionsWrapper = styled.div`
  
  display: flex;
  flex-direction: row;
- 
 `

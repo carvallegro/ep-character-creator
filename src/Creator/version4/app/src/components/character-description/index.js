@@ -1,9 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { LabelledText } from '../../common/labelled-value'
-import { withColumn } from '../../hoc/grid'
-import { Card } from '../../common/cards'
+import { LabelledText } from '@common/labelled-value'
+import { Card } from '@common/cards'
+import { withColumn } from '@hoc/grid'
 
 const Wrapper = styled.div`
   display: grid;
@@ -15,20 +16,22 @@ const Wrapper = styled.div`
     'notes    notes';
 `
 
-export const CharacterDescription = () => (
-  <Card title="General">
-    <Wrapper>
-      <LabelledText title="Player Name" value="Valentin" gridArea="player" />
-      <LabelledText title="Character Name" value="C3P0" gridArea="character" />
-      <LabelledText title="Real Age" value="12" gridArea="age" />
-      <LabelledText title="Birth Gender" value="N/A" gridArea="gender" />
-      <LabelledText
-        title="Notes"
-        value="A lotfdsbf jhfeskj  iufewi  ewfewj vf few fe hjfe"
-        gridArea="notes"
-      />
-    </Wrapper>
-  </Card>
+export const CharacterDescriptionJSX = ({ details }) => (
+    <Card title="General">
+        <Wrapper>
+            <LabelledText title="Player Name" value={details.playerName} gridArea="player"/>
+            <LabelledText title="Character Name" value={details.characterName} gridArea="character"/>
+            <LabelledText title="Real Age" value={`${details.realAge} years old`} gridArea="age"/>
+            <LabelledText title="Birth Gender" value={details.birthGender} gridArea="gender"/>
+            <LabelledText title="Notes" value={details.notesDetails} gridArea="notes"/>
+        </Wrapper>
+    </Card>
 )
 
-export default withColumn({ xs: 4 })(CharacterDescription)
+const CharacterDescription = withColumn({ xs: 4 })(CharacterDescriptionJSX)
+
+const mapStateToProps = state => ({
+    details: state.characterDescription.data
+})
+
+export default connect(mapStateToProps)(CharacterDescription)

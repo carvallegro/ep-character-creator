@@ -1,4 +1,4 @@
-import dispatcher from '../../client/dispatcher'
+import client from '../../client'
 
 import creditsActions from './credits'
 import refDataActions from './ref-data'
@@ -11,7 +11,7 @@ export const appContextTypes = {
 
 const checkExistingSession = () => ({
   type: appContextTypes.SESSION_CHECK,
-  payload: dispatcher.dispatcher('firstTime=first&getCrePoint=get')
+  payload: client.dispatch('firstTime=first&getCrePoint=get')
 })
 
 const loadingStart = () => ({ type: appContextTypes.LOADING_START })

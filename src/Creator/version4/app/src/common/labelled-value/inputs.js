@@ -1,11 +1,12 @@
-import { InputWrapper} from './inputs.style'
-import { Icon } from 'carbon-components-react'
-import { iconCheckmark, iconClose } from 'carbon-icons'
+import kebabCase from 'lodash/fp/lowerCase'
+
 import React from 'react'
 import { compose } from 'recompose'
 import { withTheme } from 'styled-components'
-import kebabCase from 'lodash/fp/lowerCase'
-import { InputActionsWrapper, InputButtonWrapper, StyledTextInput } from './inputs.style'
+import { Icon } from 'carbon-components-react'
+import { iconCheckmark, iconClose } from 'carbon-icons'
+
+import { InputActionsWrapper, InputButtonWrapper, InputWrapper, StyledTextInput } from './inputs.style'
 
 export const withInputWrapper = Component => props =>
     <InputWrapper>

@@ -14,6 +14,7 @@ export const Wrapper = styled.div`
 
 export const StyledFormLabel = styled(FormLabel)`
   position: relative;
+  user-select: none;
 `
 
 export const EditButtonWrapper = styled.button`

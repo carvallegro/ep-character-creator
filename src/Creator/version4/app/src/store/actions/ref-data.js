@@ -2,7 +2,7 @@ import pipe from 'lodash/fp/pipe'
 import flatMap from 'lodash/fp/flatMap'
 import values from 'lodash/fp/values'
 
-import { rest } from '../../client/rest'
+import { rest } from '../../client'
 
 export const dataTypes = {
   LOAD_ALL_REF_DATA: 'DATA_LOAD_REF_DATA',
