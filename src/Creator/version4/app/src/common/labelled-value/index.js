@@ -3,12 +3,12 @@ import kebabCase from 'lodash/fp/lowerCase'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { compose } from 'recompose'
-import { Icon } from 'carbon-components-react'
+import { Icon, TextInputSkeleton } from 'carbon-components-react'
 import { iconEdit } from 'carbon-icons'
 
 import { withEditEffect, withHoverEffect } from '@hoc/cursorEffects'
 
-import { EditButtonWrapper, StyledFormLabel, Wrapper } from './styles'
+import { EditButtonWrapper, StyledFormLabel, Wrapper, SkeletonWrapper } from './styles'
 import { TextInput } from './inputs'
 import Value from './value'
 
@@ -19,7 +19,9 @@ const propTypes = valuePropType => ({
     value: valuePropType,
     defaultValue: valuePropType,
     readOnly: PropTypes.bool,
-    gridArea: PropTypes.string
+    isLoading: PropTypes.bool,
+    gridArea: PropTypes.string,
+    onUpdate: PropTypes.func.isRequired
 })
 
 const EditButton = ({ onClick, visible }) =>
@@ -31,36 +33,59 @@ const EditButton = ({ onClick, visible }) =>
         </EditButtonWrapper>
     )
 
-const LabelledTextJSX = ({ title, value, defaultValue, gridArea, onHover, hovered, isBeingEdited, edit }) =>
+const LabelledTextJSX = ({
+                             title,
+                             value,
+                             defaultValue,
+                             gridArea,
+                             isBeingEdited,
+                             setEdition,
+                             isLoading,
+                             hovered,
+                             onHover,
+                             onUpdate
+                         }) =>
     <Wrapper
         gridArea={gridArea}
         onMouseOver={() => onHover(true)}
         onMouseLeave={() => onHover(false)}
         onClick={e => e.preventDefault()}>
         <StyledFormLabel>
-            {title}{' '}
-            <EditButton
-                onClick={() => edit(true)}
-                visible={hovered}/>
+            {title}
+            {
+                !isLoading &&
+                <EditButton
+                    visible={hovered}
+                    onClick={() => setEdition(true)}/>
+            }
         </StyledFormLabel>
         {
-            !isBeingEdited &&
+            !isBeingEdited && !isLoading &&
             <Value
                 value={value}
                 default={defaultValue}/>
         }
         {
-            isBeingEdited &&
+            isBeingEdited && !isLoading &&
             <TextInput id={kebabCase(title)}
                        light
                        hideLabel={true}
                        labelText=''
                        value={value}
-                       onValidate={() => edit(false)}
-                       onCancel={() => edit(false)}/>
+                       onCancel={() => setEdition(false)}
+                       onValidate={inputValue => {
+                           setEdition(false)
+                           onUpdate(inputValue)
+                       }}/>
+        }
+        {
+            isLoading &&
+            <SkeletonWrapper>
+                <TextInputSkeleton hideLabel/>
+            </SkeletonWrapper>
         }
     </Wrapper>
 LabelledTextJSX.propTypes = propTypes(PropTypes.string)
 
-export const LabelledText = compose(enhance, withHoverEffect)(LabelledTextJSX)
+export const LabelledText = enhance(LabelledTextJSX)
 

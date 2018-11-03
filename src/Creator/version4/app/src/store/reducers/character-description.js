@@ -16,9 +16,10 @@ const INITIAL_STATE = {
 export const characterDescription = typeToReducer(
     {
         [types.UPDATE_DETAILS]: {
-            FULFILLED: (state, {data}) => ({
+            FULFILLED: (state, {payload}) => ({
                 ...state,
-                data: data
+                loading: false,
+                data: payload
             }),
             PENDING: state => ({
                 ...state,
@@ -26,6 +27,7 @@ export const characterDescription = typeToReducer(
             }),
             REJECTED: state => ({
                 ...state,
+                loading: false,
                 error: 'something happened.'
             })
         }

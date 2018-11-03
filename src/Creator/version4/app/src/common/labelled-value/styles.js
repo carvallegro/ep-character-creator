@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { FormLabel } from 'carbon-components-react'
+import { FormLabel, TextInputSkeleton } from 'carbon-components-react'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -21,8 +21,7 @@ export const EditButtonWrapper = styled.button`
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
 
   position: absolute;
-  margin: 2px;
-  margin-top: -1px;
+  margin: -1px 2px 2px;
   
   padding: 0 1px;
   height: auto;
@@ -48,4 +47,11 @@ export const TextValue = styled.p`
   border-bottom: 1px;
   padding: 0 8px;
   height: 2rem;
+`
+
+export const SkeletonWrapper = styled.div`
+  max-height: 2rem;
+  & .bx--form-item .bx--skeleton.bx--text-input{
+    height: 2rem;
+  }
 `

@@ -8,8 +8,6 @@ import { iconCheckmark, iconClose } from 'carbon-icons'
 
 import { InputActionsWrapper, InputButtonWrapper, InputWrapper, StyledTextInput } from './inputs.style'
 
-
-
 const stateHandlers = withStateHandlers(
     props => ({
         inputValue: props.value
@@ -22,7 +20,9 @@ const stateHandlers = withStateHandlers(
 )
 
 export const TextInput = compose(withTheme, stateHandlers)(({ title, value, inputValue, updateStateValue, onValidate, onCancel, theme }) =>
-    <InputContainer onValidate={onValidate} onCancel={onCancel} theme={theme}>
+    <InputContainer theme={theme}
+                    onCancel={onCancel}
+                    onValidate={() => onValidate(inputValue)}>
         <StyledTextInput
             id={kebabCase(title)}
             hideLabel={true}
@@ -32,21 +32,21 @@ export const TextInput = compose(withTheme, stateHandlers)(({ title, value, inpu
             light/>
     </InputContainer>)
 
-const InputContainer = props =>
+const InputContainer = ({children, theme, onCancel, onValidate}) =>
     <InputWrapper>
-        {props.children}
+        {children}
         <InputActionsWrapper>
             <InputButtonWrapper
-                onClick={() => props.onValidate(props.inputValue)}>
+                onClick={onValidate}>
                 <Icon icon={iconCheckmark}
-                      fill={props.theme.colors.green[60]}
+                      fill={theme.colors.green[60]}
                       height='12px'
                       width='12px'/>
             </InputButtonWrapper>
             <InputButtonWrapper
-                onClick={props.onCancel}>
+                onClick={onCancel}>
                 <Icon icon={iconClose}
-                      fill={props.theme.colors.red[60]}/>
+                      fill={theme.colors.red[60]}/>
             </InputButtonWrapper>
         </InputActionsWrapper>
     </InputWrapper>
