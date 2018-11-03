@@ -5,10 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import * as reducers from './reducers'
 
-let middlewares = applyMiddleware(
-  thunk,
-  promiseMiddleware()
-)
+let middlewares = applyMiddleware(thunk, promiseMiddleware())
 
 if (process.env.NODE_ENV !== 'prod') {
   middlewares = composeWithDevTools(middlewares)

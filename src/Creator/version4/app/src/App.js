@@ -10,33 +10,26 @@ import CharacterPage from './pages/character-sheet'
 
 import './App.scss'
 
-const App = ({sessionCheckLoading, sessionExist}) => {
+const App = ({ sessionCheckLoading, sessionExist }) => {
   return (
     <Router>
       <Fragment>
-        {
-          sessionCheckLoading &&
-          <Loading/>
-        }
-        {
-          !sessionExist &&
-          <NewCharacterPage/>
-        }
-        {
-          sessionExist &&
+        {sessionCheckLoading && <Loading />}
+        {!sessionExist && <NewCharacterPage />}
+        {sessionExist && (
           <Layout>
-            <Route path="/" exact component={CharacterPage}/>
-            <Route path="/database" exact component={DatabasePage}/>
+            <Route path="/" exact component={CharacterPage} />
+            <Route path="/database" exact component={DatabasePage} />
           </Layout>
-        }
+        )}
       </Fragment>
     </Router>
   )
 }
 
-const mapStateToProps = ({appContext}) => ({
+const mapStateToProps = ({ appContext }) => ({
   sessionCheckLoading: appContext.session.loading,
-  sessionExist: (!appContext.session.loading) && appContext.session.exist
+  sessionExist: !appContext.session.loading && appContext.session.exist
 })
 
 export default connect(mapStateToProps)(App)

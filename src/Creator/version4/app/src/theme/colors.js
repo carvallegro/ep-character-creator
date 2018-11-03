@@ -1,6 +1,6 @@
-import { colors }from '@carbon/colors'
+import { colors } from '@carbon/colors'
 
-colors.blue[51]= '#3d70b2'
+colors.blue[51] = '#3d70b2'
 
 export default {
   ...colors,
@@ -17,6 +17,6 @@ export default {
     70: '#8c9ba5',
     80: '#dfe6eb',
     90: '#eff2f5',
-    100: '#eff2f5',
+    100: '#eff2f5'
   }
 }

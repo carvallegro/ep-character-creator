@@ -20,6 +20,6 @@ const bookType = book => {
   }
 }
 
-const BookTag = ({ book }) => (<Tag type={bookType(book)}>{book}</Tag>)
+const BookTag = ({ book }) => <Tag type={bookType(book)}>{book}</Tag>
 
 export default BookTag

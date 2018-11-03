@@ -13,13 +13,13 @@ const DatabasePage = () => (
     <H h={1}>Backgrounds</H>
     <Backgrounds />
     <H h={1}>Gear</H>
-    <GearList/>
+    <GearList />
     <H h={1}>AI</H>
-    <AiList/>
+    <AiList />
     <H h={1}>Software</H>
-    <SoftwareList/>
+    <SoftwareList />
     <H h={1}>Morphs</H>
-    <MorphList/>
+    <MorphList />
   </Fragment>
 )
 

@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
 `
 
 export const Content = styled.header`
-  background-color: ${({theme}) => theme.colors.coolGray['90']}};
+  background-color: ${({ theme }) => theme.colors.coolGray['90']}};
   min-height: 100vh;
   display: flex;
   flex-direction: column;

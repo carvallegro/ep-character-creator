@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 import { GroupedList, NameAndBookLine } from '../../common/list'
 import { withColumn } from '../../hoc/grid'
 
-const MorphList = ({morphs}) => (
+const MorphList = ({ morphs }) => (
   <Fragment>
     <GroupedList
       title="Select a morph"
@@ -20,8 +20,12 @@ const MorphList = ({morphs}) => (
   </Fragment>
 )
 
-const mapStateToProps = ({refData}) => ({
-  morphs: pipe(values, groupBy('morphType'), mapKeys(capitalize))(refData.morphs.data)
+const mapStateToProps = ({ refData }) => ({
+  morphs: pipe(
+    values,
+    groupBy('morphType'),
+    mapKeys(capitalize)
+  )(refData.morphs.data)
 })
 
 export default connect(mapStateToProps)(withColumn({ xs: 2 })(MorphList))
