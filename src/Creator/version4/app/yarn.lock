@@ -1863,10 +1863,11 @@ capture-exit@^1.2.0:
   dependencies:
     rsvp "^3.3.3"
 
-carbon-components-react@^6.41.0:
-  version "6.41.0"
-  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-6.41.0.tgz#6fe3390180dc0b1faae850ba2c2ec3f46e27ef71"
+carbon-components-react@^6.45.2:
+  version "6.45.2"
+  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-6.45.2.tgz#545ca3432a0979cbdf5637127e9b97ae5e850e94"
   dependencies:
+    "@carbon/icons-react" "^0.0.1-alpha.2"
     classnames "2.2.6"
     downshift "^1.31.14"
     flatpickr "4.5.1"
@@ -1877,9 +1878,9 @@ carbon-components-react@^6.41.0:
     warning "^3.0.0"
     window-or-global "^1.0.1"
 
-carbon-components@^9.30.1:
-  version "9.30.1"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.30.1.tgz#76815de44a9651115b9bea74b4b380ca73ab7076"
+carbon-components@^9.44.1:
+  version "9.44.1"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-9.44.1.tgz#d745d55aeb0406111c86585e83ba3d6b8698b777"
   dependencies:
     "@carbon/colors" "^0.0.1-alpha.0"
     carbon-icons "^7.0.7"
