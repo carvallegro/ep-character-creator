@@ -53,5 +53,6 @@ export const SkeletonWrapper = styled.div`
   max-height: 2rem;
   & .bx--form-item .bx--skeleton.bx--text-input{
     height: 2rem;
+    min-width: initial;
   }
 `
