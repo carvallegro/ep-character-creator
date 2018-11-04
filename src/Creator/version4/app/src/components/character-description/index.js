@@ -10,7 +10,7 @@ import characterDescription from '@store/actions/character-description'
 const Wrapper = styled.div`
   display: grid;
   grid-gap: 12px;
-  grid-auto-columns: 50%;
+  grid-auto-columns: 1fr;
   grid-template:
     'player   character'
     'age      gender'

@@ -18,7 +18,7 @@ const propTypes = valuePropType => ({
     title: PropTypes.string.isRequired,
     value: valuePropType,
     defaultValue: valuePropType,
-    readOnly: PropTypes.bool,
+    readonly: PropTypes.bool,
     isLoading: PropTypes.bool,
     gridArea: PropTypes.string,
     onUpdate: PropTypes.func.isRequired
@@ -38,6 +38,7 @@ const LabelledTextJSX = ({
                              value,
                              defaultValue,
                              gridArea,
+                             readonly,
                              isBeingEdited,
                              setEdition,
                              isLoading,
@@ -53,7 +54,7 @@ const LabelledTextJSX = ({
         <StyledFormLabel>
             {title}
             {
-                !isLoading &&
+                !isLoading && !readonly &&
                 <EditButton
                     visible={hovered}
                     onClick={() => setEdition(true)}/>
@@ -66,7 +67,7 @@ const LabelledTextJSX = ({
                 default={defaultValue}/>
         }
         {
-            isBeingEdited && !isLoading &&
+            isBeingEdited && !isLoading && !readonly &&
             <TextInput id={kebabCase(title)}
                        light
                        hideLabel={true}
